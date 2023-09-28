@@ -21,10 +21,31 @@ const createUser=async (req,res)=>{
             message:"error in creating user",
             error:error
         })
-    }
-    
+    }    
+}
+
+const signIn=async (req,res)=>{
+    try {
+        const user=await userService.signIn({
+        email:req.body.email,
+        password:req.body.password
+        });
+    return res.status(200).json({
+        success:true,
+        message:"successfully signIn of user",
+        error:{},
+        data:user
+    })
+    } catch (error) {
+        return res.status(200).json({
+            data:[],
+            message:"error in signIn of user",
+            error:error
+        })
+    }    
 }
 
 module.exports={
-    createUser
+    createUser,
+    signIn
 }
