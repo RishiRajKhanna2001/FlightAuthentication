@@ -46,7 +46,7 @@ class UserRepository{
     try {
         const user=await User.findOne({
          where:{
-          email:userEmail
+          email:userEmail.email
          }
         });
         return user;
@@ -57,5 +57,4 @@ class UserRepository{
   }
 
 }
-
 module.exports=UserRepository;
