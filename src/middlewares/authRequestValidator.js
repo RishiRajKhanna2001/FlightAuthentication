@@ -1,4 +1,4 @@
-const validateUserSignup=(req,res,next)=>{
+const validateUserAuth=(req,res,next)=>{
    if(!req.body.email || !req.body.password)
    {
     return res.status(400).json({
@@ -12,5 +12,5 @@ const validateUserSignup=(req,res,next)=>{
 }
 
 module.exports={
-    validateUserSignup
+    validateUserAuth
 }

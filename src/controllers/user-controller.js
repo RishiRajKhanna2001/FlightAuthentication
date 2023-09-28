@@ -26,15 +26,15 @@ const createUser=async (req,res)=>{
 
 const signIn=async (req,res)=>{
     try {
-        const user=await userService.signIn({
-        email:req.body.email,
-        password:req.body.password
-        });
+        const user=await userService.signIn(
+        req.body.email,
+        req.body.password
+        );
     return res.status(200).json({
+        data:user,
         success:true,
         message:"successfully signIn of user",
-        error:{},
-        data:user
+        error:{}
     })
     } catch (error) {
         return res.status(200).json({
