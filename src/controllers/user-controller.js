@@ -24,6 +24,25 @@ const createUser=async (req,res)=>{
     }    
 }
 
+const isAuthenticated=async (req,res)=>{
+    try {
+        const token= req.headers['x-access-token']; 
+        const result=await userService.isAuthenticated(token);
+        return res.status(200).json({
+            success:true,
+            message:"user is authentic",
+            error:{},
+            data:result
+        }) 
+    } catch (error) {
+        return res.status(200).json({
+            data:[],
+            message:"error in  authentication",
+            error:error
+        })
+    }
+}
+
 const signIn=async (req,res)=>{
     try {
         const user=await userService.signIn(
@@ -45,7 +64,27 @@ const signIn=async (req,res)=>{
     }    
 }
 
+const isAdmin=async (req,res)=>{
+    try {
+        const response=await userService.isAdmin(req.body.id)
+    return res.status(200).json({
+        data:response,
+        success:true,
+        message:"successful in finding role of user",
+        error:{}
+    })
+    } catch (error) {
+        return res.status(200).json({
+            data:[],
+            message:"error in finding role of user",
+            error:error
+        })
+    }    
+}
+
 module.exports={
     createUser,
-    signIn
+    signIn,
+    isAuthenticated,
+    isAdmin
 }
